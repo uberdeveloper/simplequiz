@@ -20,7 +20,8 @@
 			<ul class="list-group" *ngFor="let c of choices; index as idx">
 				<li class="list-group-item list-group-item-action">
 					<input type="radio" name="answergroup" id = {{idx}}
-					 value = {{c}} [(ngModel)]="answer">
+					 value = {{c}}  [(ngModel)]="answer">
+
 					 <label for="{{idx}}">{{c}}</label>			 
 				</li>
 			</ul>
