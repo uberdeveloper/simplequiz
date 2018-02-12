@@ -3,25 +3,7 @@ import { AngularFirestore, AngularFirestoreDocument,
 AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireStorage } from 'angularfire2/storage';
-
-
-function shuffle(list: string[]): string[] {
-	let options = [
-		[0, 1, 2, 3],
-		[3, 1 ,2, 0],
-		[2, 0, 1, 3],
-		[1, 2, 3, 0],
-		[1, 0, 2, 3],
-		[0, 3, 2, 1]
-	]
-	let r = options[Math.floor(Math.random()*options.length)]
-	let arr = new Array()
-	for (let i = 0; i < 4; i++) {
-		arr.push(list[r[i]])
-	}
-	return arr
-}
-
+import shuffle = require('shuffle-array');
 
 @Component({
   selector: 'app-quiz',
@@ -43,8 +25,9 @@ export class QuizComponent implements OnInit {
 	private subject = 'tnusrb';
 	choices = new Array();
 	img: Observable<string>;
-	isPic = false;
+	qType: string;
 	initialized = false;
+  failures = new Array();
 
 
   constructor(
@@ -54,15 +37,13 @@ export class QuizComponent implements OnInit {
   }
 
   ngOnInit() {
-  	this.getQuestion()
+  	  this.getQuestion();
+      this.number_of_questions = this.ques;
   }
 
-  set_no_of_questions(q) {
-  	if (!this.initialized) {
-  		console.log('Hi')
-  		this.number_of_questions = q
-  		this.initialized = true
-  	}
+  set_no_of_questions(q){
+    this.number_of_questions = q;
+    console.log(this.number_of_questions)
   }
 
   updateAnswer(){
@@ -75,6 +56,7 @@ export class QuizComponent implements OnInit {
   	else {
   		this.failure = this.failure + 1
   		this.fail = this.fail + 1
+      this.failures.push(this.docId)
   		docu.update({fail: this.fail})
   	}
   }
@@ -84,7 +66,6 @@ export class QuizComponent implements OnInit {
   }
 
   private getQuestion(){
-  	this.isPic = false
   	this.answer = ''
   	let r = Math.floor(Math.random()*2147483647)
   	let data = this.db.collection(this.subject,
@@ -94,15 +75,14 @@ export class QuizComponent implements OnInit {
   			this.docId = content[0].payload.doc.id
   			let loc_data = content[0].payload.doc.data()
   			this.question = loc_data.q
+        this.qType = loc_data.qType
   			if (loc_data.qType == 'pic'){
-  				this.isPic = true
   				this.getURL(this.question)
   			}
   			this.actual_answer = loc_data.a			
   			this.fail = loc_data.fail + 1
   			this.succ = loc_data.succ
   			let choice = loc_data.choices
-  			choice.push(loc_data.a)
   			this.choices = shuffle(choice)
   		}
   	)
@@ -135,8 +115,8 @@ export class QuizComponent implements OnInit {
   get no_of_questions(): number {
   	return this.number_of_questions
   }
-}
 
+}
 
 interface Question {
 	q: string;

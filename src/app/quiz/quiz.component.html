@@ -1,27 +1,26 @@
-
 <div class="container">
 	<label for="ques">Enter number of questions: </label>
-	<input type="number" min=4 [(ngModel)]="ques" id="ques">
-
+	<input type="number" min=2 [(ngModel)]="ques" id="ques">
 	<button class="btn btn-success" (click)="set_no_of_questions(ques)">SetUp</button>
 </div>
 
 
-<div class="container-fluid" *ngIf="isQuizCompleted; else elseBlock">
-	<div *ngIf=isPic; else elseQuestion>
+<div class="container-fluid" *ngIf="isQuizCompleted;else elseBlock">
+
+	<div class="container-fluid" *ngIf="qType=='pic'">
 		<img class="img-fluid" [src] = "img | async">
-	<ng-template #elseQuestion>
-		<b>{{question}}</b>
-	</ng-template>
 	</div>
 
-	<div>
+	<div class="container-fluid" *ngIf="qType=='txt'">
+		<b>{{question}}</b>
+	</div>
+
+	<div class="container-fluid">
 		<form>
 			<ul class="list-group" *ngFor="let c of choices; index as idx">
 				<li class="list-group-item list-group-item-action">
 					<input type="radio" name="answergroup" id = {{idx}}
 					 value = {{c}}  [(ngModel)]="answer">
-
 					 <label for="{{idx}}">{{c}}</label>			 
 				</li>
 			</ul>
@@ -36,5 +35,9 @@
 
 <h3>Success: {{success}}</h3>
 <h3>Failure: {{failure}}</h3>
+<h3>Failed</h3>
+<p>
+	{{failures | json}}
+</p>
 
 <router-outlet></router-outlet>

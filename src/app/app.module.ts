@@ -9,7 +9,6 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 
-
 import { AppComponent } from './app.component';
 import { QuizComponent } from './quiz/quiz.component';
 
