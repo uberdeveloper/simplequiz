@@ -11,12 +11,14 @@ import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { QuizComponent } from './quiz/quiz.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    QuizComponent
+    QuizComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
