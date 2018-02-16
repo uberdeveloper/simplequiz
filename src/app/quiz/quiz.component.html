@@ -4,11 +4,10 @@
 	<button class="btn btn-success" (click)="set_no_of_questions(ques)">SetUp</button>
 </div>
 
-
 <div class="container-fluid" *ngIf="isQuizCompleted;else elseBlock">
 
 	<div class="container-fluid" *ngIf="qType=='pic'">
-		<img class="img-fluid" [src] = "img | async">
+		<img class="img-fluid" [src] = "(img | async) || ''">
 	</div>
 
 	<div class="container-fluid" *ngIf="qType=='txt'">
@@ -39,5 +38,14 @@
 <p>
 	{{failures | json}}
 </p>
-
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- TextSimple -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-0361804798945452"
+     data-ad-slot="1476777941"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 <router-outlet></router-outlet>

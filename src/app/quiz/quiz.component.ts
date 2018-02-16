@@ -10,6 +10,7 @@ import shuffle = require('shuffle-array');
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.css']
 })
+
 export class QuizComponent implements OnInit {
 	private number_of_questions: number;
 	ques = 6;
