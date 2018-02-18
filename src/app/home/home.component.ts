@@ -8,18 +8,22 @@ import { AuthService } from '../services/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public auth:AuthService) { }
+  constructor(public auth:AuthService) {
+   }
 
   ngOnInit() {
   }
 
-  signIn(){
-  	console.log('CLICKED');
-  	this.auth.login_google();
+  signIn(email, password){
+  	this.auth.login_email(email, password);
   }
 
   sayHi(){
   	alert('Hi')
   	console.log('Hi')
+  }
+  
+  get authState(){
+    return this.auth.uid;
   }
 }

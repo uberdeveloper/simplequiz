@@ -1,5 +1,7 @@
 <p>
-  <button name="auth" (click)="signIn()">Click me</button>
+  <input [(ngModel)]="email" name="email">
+  <input [(ngModel)]="password" name="password">
+  <button name="auth" (click)="signIn(email, password)">Click me</button>
 </p>
-<p>{{auth}}</p>
-<app-navbar></app-navbar>
+<p>{{authState | async | json}}</p>
+<p>UID is {{uid}}</p>
