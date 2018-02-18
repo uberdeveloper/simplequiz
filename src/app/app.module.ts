@@ -8,17 +8,20 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
-
 import { AppComponent } from './app.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AuthService } from './services/auth.service';
+import { HomeComponent } from './home/home.component';
+import { AdsenseModule } from 'ng2-adsense';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     QuizComponent,
-    NavbarComponent
+    NavbarComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -28,9 +31,15 @@ import { NavbarComponent } from './navbar/navbar.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    AdsenseModule.forRoot({
+      adClient: "ca-pub-0361804798945452",
+      adSlot: "1476777941"
+    })
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
