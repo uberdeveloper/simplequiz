@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreDocument,
 AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireStorage } from 'angularfire2/storage';
+import { QuestionService } from '../services/question.service';
 import shuffle = require('shuffle-array');
 
 @Component({
@@ -33,7 +34,8 @@ export class QuizComponent implements OnInit {
 
   constructor(
   	private db: AngularFirestore,
-  	private storage: AngularFireStorage
+  	private storage: AngularFireStorage,
+    private Q: QuestionService
   	) { 
   }
 
@@ -66,6 +68,20 @@ export class QuizComponent implements OnInit {
   	this.subject = sub
   }
 
+  private getQ(){
+    let q = this.Q;
+    q.get_question();
+    console.log(q);
+    let qn = q.q_data;
+    this.question = qn.q
+    this.qType = qn.qType
+    if (qn.QType == 'pic') {
+      this.getURL(qn.q)
+    }
+    this.actual_answer = qn.a
+    this.choices = shuffle(qn.choices)    
+  }
+
   private getQuestion(){
   	this.answer = ''
   	let r = Math.floor(Math.random()*2147483647)
@@ -92,7 +108,7 @@ export class QuizComponent implements OnInit {
   nextQuestion(){
   	if ((this.success + this.failure) < this.number_of_questions) {
   		this.updateAnswer()
-  		this.getQuestion()
+  		this.getQ()
   	}
   	else {
   		this.answer = 'Quiz finished! Thank you'
