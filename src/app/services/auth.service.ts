@@ -6,17 +6,18 @@ import * as firebase from 'firebase/app';
 
 @Injectable()
 export class AuthService {
-  
+	authState:any = null;  
 
   constructor(private afAuth: AngularFireAuth) { 
+  	this.afAuth.authState.subscribe(
+  		(user)=>{
+  			this.authState=user;
+  		}
+  	)
   }
 
   login_email(email, password) {
     this.afAuth.auth.signInWithEmailAndPassword(email, password)
-  }
-  
-  login_facebook(){
-    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
   }
   
   login_google(){
@@ -27,16 +28,12 @@ export class AuthService {
   	this.afAuth.auth.signOut();
   }
   
-  get authState(){
-    return this.afAuth.authState;
+  get uid(){
+  	return this.authState.uid;
+  }
+
+  get email(){
+  	return this.authState.email;
   }
   
-  get uid(){
-    this.afAuth.authState.subscribe(
-      (user)=>{
-      console.log(user);
-      return user.uid;
-      }
-    )
-  }
 }

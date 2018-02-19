@@ -1,7 +1,23 @@
-<p>
-  <input [(ngModel)]="email" name="email">
-  <input [(ngModel)]="password" name="password">
-  <button name="auth" (click)="signIn(email, password)">Click me</button>
-</p>
-<p>{{authState | async | json}}</p>
-<p>UID is {{uid}}</p>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col border">
+			
+		</div>
+		<div class="col border">
+			<div class="row">
+				<input [(ngModel)]="email" type="text" name="email">	
+			</div>
+			<div class="row">
+				<input [(ngModel)]="password" type="password" name="password">
+			</div>
+			<div class="row">
+				<button class="btn btn-primary" (click)="signIn(email, password)">Log in</button>
+			</div>
+			<p></p>
+			<div class="row">
+				<button class="btn btn-primary" (click)="signInGoogle()">Sign in with Google</button>
+			</div>
+		</div>
+
+	</div>
+</div>

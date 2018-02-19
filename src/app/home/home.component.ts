@@ -18,12 +18,9 @@ export class HomeComponent implements OnInit {
   	this.auth.login_email(email, password);
   }
 
-  sayHi(){
-  	alert('Hi')
-  	console.log('Hi')
+  signInGoogle(){
+    this.auth.login_google();
   }
-  
-  get authState(){
-    return this.auth.uid;
-  }
+
+
 }
