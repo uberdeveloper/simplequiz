@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AuthService } from './services/auth.service';
+import { QuestionService } from './services/question.service';
 import { HomeComponent } from './home/home.component';
 import { AdsenseModule } from 'ng2-adsense';
 
@@ -34,11 +35,12 @@ import { AdsenseModule } from 'ng2-adsense';
     AngularFireStorageModule,
     AdsenseModule.forRoot({
       adClient: "ca-pub-0361804798945452",
-      adSlot: "1476777941"
+      adSlot: "8289807733"
     })
   ],
   providers: [
-    AuthService
+    AuthService,
+    QuestionService
   ],
   bootstrap: [AppComponent]
 })
