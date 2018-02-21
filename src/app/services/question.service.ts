@@ -16,7 +16,8 @@ export class QuestionService {
   constructor(
   	private db: AngularFirestore,
   	private storage: AngularFireStorage,
-  	private auth: AuthService) {
+    public auth: AuthService
+    ) {
   	this.add_subject('tnusrb')
    }
 
@@ -27,7 +28,7 @@ export class QuestionService {
   getQuestion(){
   	let r = Math.floor(Math.random()*2147483647)
   	let data = this.db.collection(this.subject,
-  		ref => ref.where('random', '>', r).limit(1)).snapshotChanges()  	
+  		ref => ref.where('random', '>', r).limit(1)).snapshotChanges()
   	data.subscribe(
   		(content) => {
   			this.docID = content[0].payload.doc.id

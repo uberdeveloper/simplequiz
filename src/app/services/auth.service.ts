@@ -6,11 +6,12 @@ import * as firebase from 'firebase/app';
 
 @Injectable()
 export class AuthService {
-	authState:any = null;  
+	authState: any;
+	error = '';
 
-  constructor(private afAuth: AngularFireAuth) { 
-  	this.afAuth.authState.subscribe(
-  		(user)=>{
+  constructor(public afAuth: AngularFireAuth) {
+  	afAuth.authState.subscribe(
+  		(user) => {
   			this.authState=user;
   		}
   	)
@@ -18,6 +19,15 @@ export class AuthService {
 
   login_email(email, password) {
     this.afAuth.auth.signInWithEmailAndPassword(email, password)
+    	.then(user => {
+    		console.log('SUCCESS')
+    		this.authState=user;
+    	})
+    	.catch(err => {
+    		alert(err.message)
+    		console.log('ERROR IS')
+    		this.error = err
+    	});
   }
   
   login_google(){
@@ -27,9 +37,12 @@ export class AuthService {
   logout(){
   	this.afAuth.auth.signOut();
   }
-  
-  get uid(){
-  	return this.authState.uid;
+
+  get uid() {
+  	if (this.authState != null){
+  		return this.authState.uid;
+  	}
+
   }
 
   get email(){

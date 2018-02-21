@@ -4,6 +4,7 @@ AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { QuestionService } from '../services/question.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 import shuffle = require('shuffle-array');
 
 @Component({
@@ -30,13 +31,20 @@ export class QuizComponent implements OnInit {
 	qType: string;
 	initialized = false;
   failures = new Array();
-
+  uid = null;
 
   constructor(
   	private db: AngularFirestore,
   	private storage: AngularFireStorage,
-    private Q: QuestionService
+    public afAuth: AngularFireAuth
   	) { 
+    this.afAuth.authState.subscribe(
+      (user)=>{
+        if (user != null) {
+          this.uid = user.uid;
+        }
+      }
+    )
   }
 
   ngOnInit() {
@@ -55,6 +63,12 @@ export class QuizComponent implements OnInit {
   		this.success = this.success + 1
   		this.succ = this.succ + 1 
   		docu.update({succ: this.succ})  
+      if (this.uid) {
+        console.log('user/' + this.uid + '/' + this.docId)
+        let dct = {}
+        dct[this.docId] = 1
+        this.db.doc('user/'+this.uid).set(dct)
+      }
   	}
   	else {
   		this.failure = this.failure + 1
@@ -66,20 +80,6 @@ export class QuizComponent implements OnInit {
 
   private set_subject(sub: string) : void {
   	this.subject = sub
-  }
-
-  private getQ(){
-    let q = this.Q;
-    q.get_question();
-    console.log(q);
-    let qn = q.q_data;
-    this.question = qn.q
-    this.qType = qn.qType
-    if (qn.QType == 'pic') {
-      this.getURL(qn.q)
-    }
-    this.actual_answer = qn.a
-    this.choices = shuffle(qn.choices)    
   }
 
   private getQuestion(){
@@ -107,8 +107,8 @@ export class QuizComponent implements OnInit {
 
   nextQuestion(){
   	if ((this.success + this.failure) < this.number_of_questions) {
-  		this.updateAnswer()
-  		this.getQ()
+      this.updateAnswer();
+  		this.getQuestion();
   	}
   	else {
   		this.answer = 'Quiz finished! Thank you'

@@ -1,4 +1,5 @@
 <div class="container">
+	<h2>Hi {{uid}} </h2>
 	<label for="ques">Enter number of questions: </label>
 	<input type="number" min=2 [(ngModel)]="ques" id="ques">
 	<button class="btn btn-success" (click)="set_no_of_questions(ques)">SetUp</button>

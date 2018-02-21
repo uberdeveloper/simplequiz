@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { QuestionService } from '../services/question.service';
+
 
 @Component({
   selector: 'app-home',
@@ -10,8 +10,7 @@ import { QuestionService } from '../services/question.service';
 export class HomeComponent implements OnInit {
 
   constructor(
-    public auth:AuthService,
-    public Q: QuestionService
+    public auth:AuthService
     ) {
    }
 
@@ -25,6 +24,7 @@ export class HomeComponent implements OnInit {
   signInGoogle(){
     this.auth.login_google();
   }
+
 
 
 }

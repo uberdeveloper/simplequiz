@@ -1,7 +1,9 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col border">
-			<button class="btn btn-danger" (click)="ques()">Click</button>
+			<button class="btn btn-danger" (click)="auth.logout()">Logout</button>
+			{{error}}
+			{{auth.uid}}
 		</div>
 		<div class="col border">
 			<div class="row">
