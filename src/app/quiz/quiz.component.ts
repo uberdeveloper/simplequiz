@@ -15,7 +15,7 @@ import shuffle = require('shuffle-array');
 
 export class QuizComponent implements OnInit {
 	private number_of_questions: number;
-	ques = 6;
+	ques = 10;
 	success = 0;
 	failure = 0;
 	review: string[];
@@ -29,9 +29,9 @@ export class QuizComponent implements OnInit {
 	choices = new Array();
 	img: Observable<string>;
 	qType: string;
-	initialized = false;
   failures = new Array();
   uid = null;
+  answered = false;
 
   constructor(
   	private db: AngularFirestore,
@@ -84,6 +84,7 @@ export class QuizComponent implements OnInit {
 
   private getQuestion(){
   	this.answer = ''
+    this.answered = false
   	let r = Math.floor(Math.random()*2147483647)
   	let data = this.db.collection(this.subject,
   		ref => ref.where('random', '>', r).limit(1)).snapshotChanges()  	
@@ -107,6 +108,7 @@ export class QuizComponent implements OnInit {
 
   nextQuestion(){
   	if ((this.success + this.failure) < this.number_of_questions) {
+      this.answered = true;
       this.updateAnswer();
   		this.getQuestion();
   	}
@@ -131,6 +133,10 @@ export class QuizComponent implements OnInit {
 
   get no_of_questions(): number {
   	return this.number_of_questions
+  }
+
+  get isRight(): boolean{
+    return this.answer == this.actual_answer;
   }
 
 }

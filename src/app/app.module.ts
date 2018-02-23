@@ -35,7 +35,7 @@ import { AdsenseModule } from 'ng2-adsense';
     AngularFireStorageModule,
     AdsenseModule.forRoot({
       adClient: "ca-pub-0361804798945452",
-      adSlot: "8289807733"
+      adSlot: "1476777941"
     })
   ],
   providers: [
