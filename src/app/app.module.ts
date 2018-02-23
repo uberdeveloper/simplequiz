@@ -15,6 +15,9 @@ import { AuthService } from './services/auth.service';
 import { QuestionService } from './services/question.service';
 import { HomeComponent } from './home/home.component';
 import { AdsenseModule } from 'ng2-adsense';
+import { PLATFORM_ID, APP_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+
 
 
 @NgModule({
@@ -25,7 +28,7 @@ import { AdsenseModule } from 'ng2-adsense';
     HomeComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({appId:'Quiz'}),
     FormsModule,
     RouterModule,
     routing,
@@ -44,4 +47,12 @@ import { AdsenseModule } from 'ng2-adsense';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(
+      @Inject(PLATFORM_ID) private platformId: Object,
+      @Inject(APP_ID) private appId: string) {
+      const platform = isPlatformBrowser(platformId) ?
+        'in the browser' : 'on the server';
+      console.log(`Running ${platform} with appId=${appId}`);
+    }
+}
