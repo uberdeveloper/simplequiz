@@ -9,6 +9,10 @@ import { AuthService } from '../services/auth.service';
 })
 export class HomeComponent implements OnInit {
 
+  email: string;
+  password: string;
+  error: string;
+
   constructor(
     public auth:AuthService
     ) {

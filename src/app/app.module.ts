@@ -28,7 +28,7 @@ import { isPlatformBrowser } from '@angular/common';
     HomeComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({appId:'Quiz'}),
+    BrowserModule.withServerTransition({appId:'quiz'}),
     FormsModule,
     RouterModule,
     routing,
