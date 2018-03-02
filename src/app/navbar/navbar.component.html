@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-light bg-light">
+<nav class="navbar navbar-expand navbar-light bg-light bg-primary">
   <a class="navbar-brand" href="#">Home</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -6,11 +6,27 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-      	<a routerLink="home">Home</a>        
+      	<a  class="nav-link" routerLink="">Home</a>        
       </li>
-      <li class="nav-item">
-        <a routerLink="quiz">Quiz</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Training
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/assets/train1.html">Train 1</a>
+          <a class="dropdown-item" href="/assets/train2.html">Train 2</a>
+          <a class="dropdown-item" href="/assets/train3.html">Train 3</a>
+          <a class="dropdown-item" href="/assets/train4.html">Train 4</a>
+          <a class="dropdown-item" href="/assets/train5.html">Train 5</a>
+          <a class="dropdown-item" href="/assets/train6.html">Train 6</a>
+          <a class="dropdown-item" href="/assets/train7.html">Train 7</a>
+          <a class="dropdown-item" href="/assets/train8.html">Train 8</a>
+          <a class="dropdown-item" href="/assets/train9.html">Train 9</a>
+          <a class="dropdown-item" href="/assets/train10.html">Train 10</a>
+        </div>
       </li>
+
+
     </ul>
   </div>
 </nav>

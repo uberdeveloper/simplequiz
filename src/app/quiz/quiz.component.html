@@ -1,7 +1,11 @@
 <div class="container row">
-	<label for="ques">Enter number of questions: </label>
+	<div class="col-8">
+	<label for="ques"><h3>Enter number of questions and click SetUp </h3></label>
+	</div>
+	<div class="col">
 	<input type="number" min=2 [(ngModel)]="ques" id="ques">
 	<button class="btn btn-success" (click)="set_no_of_questions(ques)">SetUp</button>
+	</div>
 </div>
 
 <div class="container-fluid row" *ngIf="isQuizCompleted;else elseBlock">

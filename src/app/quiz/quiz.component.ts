@@ -75,7 +75,7 @@ export class QuizComponent implements OnInit {
   		this.fail = this.fail + 1
       this.failures.push(this.docId)
   		docu.update({fail: this.fail})
-      alert('The correct answer is' + this.actual_answer)
+      alert('The correct answer is ' + this.actual_answer)
   	}
   }
 
