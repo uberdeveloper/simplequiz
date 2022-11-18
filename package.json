@@ -35,7 +35,7 @@
     "core-js": "^2.4.1",
     "express": "^4.16.2",
     "firebase": "^4.10.1",
-    "firebase-admin": "^5.9.0",
+    "firebase-admin": "^11.2.1",
     "ng2-adsense": "^5.1.4",
     "path": "^0.12.7",
     "preboot": "^6.0.0-beta.2",
