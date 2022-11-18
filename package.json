@@ -34,7 +34,7 @@
     "body-parser": "^1.18.2",
     "core-js": "^2.4.1",
     "express": "^4.16.2",
-    "firebase": "^4.13.1",
+    "firebase": "^9.14.0",
     "firebase-admin": "^11.2.1",
     "ng2-adsense": "^5.1.4",
     "path": "^0.12.7",
